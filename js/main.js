@@ -1,8 +1,15 @@
-console.log("Esto es un log");
+let valorUno=null;
+let valorDos=null;
 
-let nombre = prompt("Ingresa tu nombre");
+valorUno=prompt("Ingrese un valor");
+valorDos=prompt("Ingrese otro valor");
+
+if(valorUno == valorDos){
+    alert("Los valores son iguales")
+}
+ else{
+    alert("Los valores son distintos")
+ }
 
 
-let apellido = prompt("Ingresa tu apellido");
-
-alert(nombre+' '+apellido);
+ 

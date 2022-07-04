@@ -1,57 +1,82 @@
-let valorUno=null;
-let valorDos=null;
+/*
+Desafio 1
 
-valorUno=prompt("Ingrese un valor");
-valorDos=prompt("Ingrese otro valor");
+- Pedir número mediante prompt y sumarle otro número en cada repetición,realizando una
+salida por cada resultado
 
-if(valorUno == valorDos){
-    alert("Los valores son iguales")
-}
- else{
-    alert("Los valores son distintos")
- }
-
-
-//Pedir número mediante prompt y si es mayor a 1000 mostrar un alert.
-
-let valorNumerico=null;
+let acomulador=0;
  
-valorNumerico=prompt("Ingrese un valor");
-valorNumerico=parseInt(valorNumerico);
+acomulador=parseInt(prompt("Ingrese un valor"));
 
-if(valorNumerico > 1000){
-    alert("El numero es mayor a 1000")
+for(let i=0;i<3;i++){
+    acomulador=acomulador+i;
+    console.log(acomulador);
 }
- else{
-    alert("El numero es menor a 1000")
- }
+console.log(acomulador);
+alert(acomulador);
 
  
+document.write(acomulador);
+*/
+    //Desafio 2
+/*
+    Archivo HTML y Archivo JS, referenciado en el HTML por etiqueta <script
+    src="js/miarchivo.js"></script>, que incluya la definición de un algoritmo en JavaScript que
+    emplee bucles e instrucciones condicionales.
 
-// Pedir un texto mediante prompt, y si es igual a "Hola" mostrar un alerta por consola.
+    (Cantidad de Par o impar dentro de X numero ingresado)
+
+
+let Numero=0;
+ 
+Numero=parseInt(prompt("Ingrese un valor"));
+CantidadDePares=0;
+CantidadDeImpares=0;
+
+for(let i=0;i<Numero;i++){ 
+    if(i%2==0){
+        alert("El numero es par"+" "+i);
+        CantidadDePares++;
+    }
+    else{
+        CantidadDeImpares++;
+        alert("El numero es impar"+" "+i);
+    }
+}
+
+alert("La cantidad de pares es:"+" "+CantidadDePares);
+alert("La cantidad de impares es:"+" "+CantidadDeImpares);
+
+/*- Pedir un texto mediante prompt, concatenar un valor en cada repetición, realizando una salida
+por cada resultado, hasta que se ingresa “ESC”.
+ //Desafio 3
+
+
 
 let entrada=null;
- 
+
 entrada=prompt("Ingrese un valor");
- 
-if(entrada == 'Hola'){
-    alert("Usted a ingresado Hola")
+
+while(entrada !="ESC"){
+    console.log(entrada+"X");
+    entrada+='X';
+    alert(entrada);
+    entrada=prompt("Ingrese un valor");
 }
- else{
-    alert("Usted no ingreso Hola")
- }
- 
+alert("Ingresaste ESC");
 
-// Pedir un número por prompt y evaluar si está entre 10 y 50. En caso positivo mostrar un alert 
 
-let valorNumerico2=null;
- 
-valorNumerico2=prompt("Ingrese un valor numerico");
-valorNumerico2=parseInt(valorNumerico2);
 
-if(valorNumerico2 > 10 && valorNumerico2 < 50){
-    alert("El numero se encuentra entre 10 y 50")
+/*- Pedir un número por prompt, repetir la salida del mensaje “Hola” la cantidad de veces
+ingresada. */
+ //Desafio 4
+
+let entrada2=0;
+
+CantidadDeVeces=parseInt(prompt("Ingrese un valor"));
+
+for(let i=0;i<=CantidadDeVeces;i++){
+    console.log("Hola"+" "+i);
+    alert("Hola");
 }
- else{
-    alert("El numero no se encuentra entre 10 y 50")
- }
+ 

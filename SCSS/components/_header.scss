@@ -1,0 +1,10 @@
+
+/*CSS tomado para dar estilo a el header*/
+.nav-item{
+    font-size: map-get($tamanio-tipografia,nav-item); /*toma el valor 16px*/
+    border: 1px solid;
+}
+
+.bg-color{
+    background-color: $color-HeaderYfooter;
+}

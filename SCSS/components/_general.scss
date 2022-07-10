@@ -1,0 +1,132 @@
+@media screen and (max-width: 768px){
+    
+    #icono_hendora{
+        width: 10%;
+    }
+}
+
+body{
+    background-color: rgba(229, 214, 214, 0.874);
+}
+
+
+h3{
+    text-align: center;
+}
+
+.btn_enviar{
+    margin: 0 auto;
+    display: flex;
+}
+
+
+a:link, a:visited, a:active {
+    text-decoration:none;
+    color: black;
+}
+
+.textoDentroDeLista{
+    text-align: center;/*centra el texto dentro de un contenedor*/
+    margin-left: 100px;
+    padding: 0 1em;
+    color: rgb(219, 213, 213);
+    text-decoration: none;
+    font-family:cursive;
+
+}
+.body{
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 16px;
+    color: rgba(56, 68, 79, 1);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/*animaciones*/
+
+.anim {
+    transition: color 1s;
+    }
+
+.anim:hover {
+    color: $color-HeaderYfooter;
+    }
+
+/*Nav*/
+a {
+  transition: background-color .5s;
+}
+
+a:hover {
+  background-color: rgb(225, 124, 36);
+}   
+
+
+.hendora{
+        @include flexbox(flex,space-between); 
+}
+
+.texto_desc{
+    text-align: center; 
+    color: rgb(3, 1, 1);
+    text-decoration: none;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+
+
+main{
+    Height:105vh;
+}
+
+
+nav ul li {
+    border: 1px solid;
+}
+        
+
+ul{
+    display:flex;
+    justify-content: space-between;
+    border: 1px solid;
+   
+}
+
+
+.div_p{
+    display: flex;   
+    justify-content: center; 
+    color: rgb(255, 255, 255);
+   
+        background-color: black;
+}
+div nav{
+        border: 1px solid;
+        background-color: black;
+
+}
+
+
+/*Aplicando boostrap*/
+
+.nav-item{
+    font-size: 16px;
+   
+}
+
+div ul li a img{
+    size: 10px;
+}
+ 
+.col-auto{
+    display: flex;
+    width: 250px;
+    
+}
+
+
+.btn_enviar{
+  position: relative;
+  margin-bottom: 5rem;
+}

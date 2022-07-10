@@ -1,0 +1,31 @@
+$justifyDistribuido:space-between; /*defino variable global para el proyecto*/
+$tamanioNotebook: 720px;
+$tamanioCelular: 420px;
+$color-HeaderYfooter:#ffaa7f;
+
+/*MAPS*/
+$tamanio-tipografia:(
+    titulos:24px,
+    subtitulos:20px,
+    nav-item:16px
+);
+
+$colores:(
+    color-letra:black,
+    color-footer: $color-HeaderYfooter
+);
+
+/*Extend: Bloque de codigo que repetimos*/
+
+%flex-center{
+    display: flex;
+    justify-content: center;
+};
+
+/*mixin*/
+
+@mixin flexbox ($flex,$justify){
+    display: $flex;
+    justify-content: $justify;
+}
+

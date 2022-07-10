@@ -1,0 +1,26 @@
+#carouselExampleControls{
+    position: absolute;
+}
+.carrusel{
+    display: flex;
+    justify-content: center;
+    height: 50px;
+}
+
+.w-10{
+    height:105vh ;  
+}
+
+.card{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    
+}
+
+.centroCard{
+    @extend %flex-center; 
+}
+
+.btn-dark-card{
+    background-color: rgba($color: #c28f3d, $alpha: 1.0);
+}

@@ -1,0 +1,19 @@
+.img-fluid{
+    display: flex;
+    @extend %flex-center;   
+    height: 370px;
+    width: 400px;
+}
+
+.estilo-proposito-web{
+   margin-top: 50px;
+   margin-bottom: 50px;
+   width: 100rem;
+   display: block;
+}
+
+.centrado{
+    @extend %flex-center; 
+}
+
+ 

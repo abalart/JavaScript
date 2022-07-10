@@ -1,0 +1,13 @@
+.preguntas{
+     
+    color: rgb(155, 35, 35); 
+ }
+
+ #carouselExampleControls{
+    position: absolute;
+}
+
+.h1{
+    @extend %flex-center; 
+}
+

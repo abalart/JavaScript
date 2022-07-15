@@ -1,58 +1,57 @@
 //ENTREGA 1 (Utilizo lo hecho en clase para el curso de desarrollo web)
 
-//El archivo .js se invoca desde el html productos
+//El archivo .js se invoca desde el html products
 
 /*********************************E-COMMERCE sobre venta de indumentaria femenina****************************************************************/
-
-
+/*
 //Declaro objeto generico a modo de ejemplo
 
-const producto = {
+const product = {
      
      id:1,
-     nombre:"Remera",
-     precio:1000,
+     name:"Remera",
+     price:1000,
      stock:9999,
-     descripcion:"Producto generico",
-     cantidadEnCarrito:1
+     descripcion:"product generico",
+     shoppingCart:1
 }
       
 
-console.log(producto);
+console.log(product);
 
-function Producto(Nuevo) {
+function product(Nuevo) {
     this.id = Nuevo.id;
-    this.nombre = Nuevo.nombre;
-    this.precio = Nuevo.precio;
+    this.name = Nuevo.name;
+    this.price = Nuevo.price;
     this.stock = Nuevo.stock;
     this.descripcion = Nuevo.descripcion;
-    this.cantidadEnCarrito = Nuevo.cantidadEnCarrito;
+    this.shoppingCart = Nuevo.shoppingCart;
     }
 
-const producto1 = new Producto({    
+const product1 = new product({    
         id:1,
-        nombre:"Jean",
-        precio:500,
+        name:"Jean",
+        price:500,
         stock:0,
         descripcion:"Jeans clasicos",
-        cantidadEnCarrito:0 });
+        shoppingCart:0 });
 
-    console.log(producto);
+    console.log(product);
 
 //Declaro funciones
 
-function validarStock(producto) {
-    const stock = producto.stock;
+function checkStock(product) {
+    const stock = product.stock;
     console.log("El stock es de:"+ stock)
-    if(producto.stock > 0){
+    if(product.stock > 0){
         return 1;
     }else{
         return 0;
     }
 }
 
-function validarProductoEnCarrito(producto) {
-    if(producto.cantidadEnCarrito > 0){
+function checkProductInShoppingCart(product) {
+    if(product.shoppingCart > 0){
         return 1;
     }else{
         return 0;
@@ -60,50 +59,80 @@ function validarProductoEnCarrito(producto) {
 }
 
 
-function agregarProductoCarrito(producto) {
-    const tenemosStock = validarStock(producto);
+function agregarproductCarrito(product) {
+    const tenemosStock = checkStock(product);
     if(tenemosStock){
-        console.log('Agregas el producto al carrito: ' + producto.nombre);
-        producto.cantidadEnCarrito++;
+        console.log('Agregas el product al carrito: ' + product.name);
+        product.shoppingCart++;
     }else{
         console.log('Sin stock');
     }
     }
 
 
-function eliminarProductoCarrito(producto) {
-    const enCarrito = validarProductoEnCarrito(producto);
+function eliminarproductCarrito(product) {
+    const enCarrito = checkProductInShoppingCart(product);
     if(enCarrito){
-        console.log('Eliminando 1 stock de '+producto.nombre+' del carrito');
-        producto.cantidadEnCarrito--;
-        console.log('Quedan: '+producto.cantidadEnCarrito+' en el carrito');
+        console.log('Eliminando 1 stock de '+product.name+' del carrito');
+        product.shoppingCart--;
+        console.log('Quedan: '+product.shoppingCart+' en el carrito');
     }else{
-        console.log('El producto no está en carrito');
+        console.log('El product no está en carrito');
     }
-     }
+ }
 
-function obtenerPrecio(producto) {
-         console.log("El precio del producto es: "+producto.precio)
+function obtenerprice(product) {
+         console.log("El price del product es: "+product.price)
      }
 
 //Tests
 
-console.log("obtenerPrecio");
-obtenerPrecio(producto);  
+console.log("obtenerprice");
+obtenerprice(product);  
 
-console.log("agregarProductoCarrito");
-agregarProductoCarrito(producto);
+console.log("agregarproductCarrito");
+agregarproductCarrito(product);
 
-console.log("eliminarProductoCarrito");
-eliminarProductoCarrito(producto);
+console.log("eliminarproductCarrito");
+eliminarproductCarrito(product);
 
-//Producto1
+//product1
 
-console.log("obtenerPrecio");
-obtenerPrecio(producto1);  
+console.log("obtenerprice");
+obtenerprice(product1);  
 
-console.log("agregarProductoCarrito");
-agregarProductoCarrito(producto1);
+console.log("agregarproductCarrito");
+agregarproductCarrito(product1);
 
-console.log("eliminarProductoCarrito");
-eliminarProductoCarrito(producto1);
+console.log("eliminarproductCarrito");
+eliminarproductCarrito(product1);
+*/
+////// PRACTICAS /////
+
+
+
+const numeros = [1, 2, 3, 4, 5];
+
+for (let index = 0; index < numeros.length; index++) {
+console.log(numeros[index])
+}
+
+console.log(numeros)
+
+numeros.push(990) //push agrega un nuevo elemento al final del array
+
+console.log("Agrego un numero al final"+numeros)
+
+numeros.unshift(0) //Agrega al comienzo
+
+console.log("Agrego un numero al comienzo"+numeros)
+
+numeros.shift() //Elimina un elemento del comienzo
+
+console.log("Elimina un elemento del comienzo"+numeros)
+
+numeros.pop()//Elimina un elemento del final
+
+console.log("Elimina un elemento del final"+numeros)
+
+

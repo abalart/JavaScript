@@ -119,6 +119,10 @@ console.log(numeros[index])
 
 console.log(numeros)
 
+numeros.splice(0,2) //Elimina, el primer parametro es el indice desde donde comenzar a eliminar y el segundo la cantidad de elementos.
+
+console.log("Se eliminaron elementos"+numeros)
+
 numeros.push(990) //push agrega un nuevo elemento al final del array
 
 console.log("Agrego un numero al final"+numeros)
@@ -135,4 +139,23 @@ numeros.pop()//Elimina un elemento del final
 
 console.log("Elimina un elemento del final"+numeros)
 
+
+numeros.unshift(-56)
+console.log("Agrega un elemento al inicio "+numeros)
+
+const palabras = ['hola','que','talco'];
+
+console.log("Se agrega * entre elementos " + palabras.join('*'))
+
+const unidos = numeros.concat(palabras) //concatena 2 arrays
+
+console.log(unidos)
+ 
+console.log("Slice "+palabras.slice(0,2))
+
+console.log( numeros.indexOf(5) ) //El elemento 5  se encuentra en la posicion 3
+
+console.log( numeros.includes(5) ) //Retorno si esta o no
+
+console.log(numeros.reverse())
 

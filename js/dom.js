@@ -1,36 +1,44 @@
- 
-//Acceso por id de elemento
-let h3 = document.getElementById("h3_productos");
- 
-console.log(h3.innerText);
- 
-h3.innerText = "Cambio texto interno";
+/****************************Entrega opcional DOM***************************/
+//Declaro variables
+let articulosCarrito = []; //Array que tendra los articulos a comprar
 
-console.log(h3.innerText);
+console.log("Array Carrito vacio:"+articulosCarrito);
+
+ //Obtener todos los productos y agregarlos al array articulosCarrito
+
+ let todosLosProductos = document.getElementsByTagName("p");
+
+ console.log("los prod son: ");
+//Recorro el articulosCarrito
+ for (const prod of todosLosProductos) {
+    console.log(prod.innerHTML);
+    articulosCarrito.push(prod.innerHTML)
+    }
+ console.log("Luego de insertar en arrayCarrito: "+articulosCarrito)
 
 
+//Crear un div "carrito" con el nombre  de ciertos elementos web
 
-//*****/
-
-// Crear nodo de tipo Elemento, etiqueta p
-let parrafo = document.createElement("p");
+console.log("Inserto elemento");
+// Crear nodo de tipo Elemento y etiqueta div
+let div = document.createElement("div");
 // Insertar HTML interno
-parrafo.innerHTML = "<h2>¡Hola Coder!</h2>";
+div.innerHTML = "<h2 id=carrito_div1>CARRITO!</h2>";
 // Añadir el nodo Element como hijo de body
-document.body.append(parrafo);
-
-/* >> Consigna: Traslada al proyecto integrador el concepto de objetos, visto en la clase de hoy. En función del
-tipo de simulador que hayas elegido, deberás:
-- Crear elementos manipulando el DOM a partir de la informaciòn de tus objetos.
-- Modificar etiquetas existentes en función del resultado de operaciones.
->>Aspectos a incluir en el entregable:
-Archivo HTML y Archivo JS, referenciado en el HTML por etiqueta <script src="js/miarchivo.js"></script>, que
-incluya la definición de un algoritmo en JavaScript que opere sobre el DOM, modificando, agregando o eliminado
-elementos.
->>Ejemplo:
-Podemos crear elementos HTML en función del listado de nuestros objetos identificados en la clase 6.
-Establecer un mensaje de bienvenida aleatorio usando un array de mensajes.
-Capturar una o màs entradas por promp() y mostrarlas en el HTML, modificando el DOM */
+document.body.append(div);
 
 
- 
+ console.log("Inserto elemento a modificar");
+// Crear nodo de tipo Elemento y etiqueta div
+let elementoAmodifocar = document.createElement("div");
+// Insertar HTML interno
+elementoAmodifocar.innerHTML = "<h2 id=carrito_div>CARRITO!</h2>";
+// Añadir el nodo Element como hijo de body
+document.body.append(elementoAmodifocar);
+
+//Modifico elemento insertado con la lista del array articulosCarrito
+
+ let carrito = document.getElementById("carrito_div");
+ carrito.innerText = articulosCarrito   
+
+

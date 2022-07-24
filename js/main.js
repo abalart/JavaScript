@@ -135,7 +135,6 @@ function AgregarProducto()
         
 }
 
-
 //Esta funcion verifica la existencia de un producto en el array carrito de compras
 
 function validarProductoEnCarrito2(producto){
@@ -160,3 +159,7 @@ validarProductoEnCarrito2(producto2) //Ojota
 console.log('****Agregar objeto producto****')
 AgregarProducto()  //Version con array objeto
 imprimirArray(carrito)
+
+
+
+

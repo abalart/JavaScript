@@ -169,7 +169,7 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
     </div>     
     </div>  
 </div>`
-})
+}) 
 
  productos.forEach((producto) => { 
     const idButton = `add-cart${producto.id}`

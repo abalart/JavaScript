@@ -70,7 +70,7 @@ alert("Ingresaste ESC");
 /*- Pedir un número por prompt, repetir la salida del mensaje “Hola” la cantidad de veces
 ingresada. */
  //Desafio 4
-
+/*
 let entrada2=0;
 
 CantidadDeVeces=parseInt(prompt("Ingrese un valor"));
@@ -79,4 +79,11 @@ for(let i=0;i<=CantidadDeVeces;i++){
     console.log("Hola"+" "+i);
     alert("Hola");
 }
- 
+*/
+const variableLocal = localStorage.setItem('bienvenida', '¡Hola Coder!');  //Clave valor
+localStorage.setItem('esValido', true);
+localStorage.setItem('unNumero', 20);
+
+let mensaje = localStorage.getItem('bienvenida');
+
+console.log(mensaje); // ‘¡Hola Coder!’

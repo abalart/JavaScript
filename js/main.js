@@ -2,6 +2,48 @@
 
 //El archivo .js se invoca desde el html productos
 /***************************************E-COMMERCE sobre venta de indumentaria femenina*********************************************************/
+
+
+
+//Declaro variables
+const totalCarrito = localStorage.getItem("totalCarrito"); //Variable que se ve en local storage
+const montoTotal = localStorage.getItem("totalMonto");
+document.getElementById("cart-total").innerHTML = totalCarrito;
+document.getElementById("month-total").innerHTML = totalCarrito;
+
+let montoAcomulado = 0;
+
+const carrito = []; //Este array almacena los productos agregados al carrito
+
+const productos = [  //Este array almacena los productos disponibles (simula la BD)
+    {
+        id: 1,
+        nombre: "Almohada",
+        precio: 1000,
+        stock: 9999,
+        descripcion: "Producto generico",
+        cantidadEnCarrito: 1
+    },
+    {
+        id: 2,
+        nombre: "Almohadon",
+        precio: 500,
+        stock: 0,
+        descripcion: "Almohadon  clasico",
+        cantidadEnCarrito: 0
+    },
+    {
+        id: 3,
+        nombre: "Bolsa de mano",
+        precio: 100,
+        stock: 1,
+        descripcion: "Bolsa de mano",
+        cantidadEnCarrito: 1
+    }
+];
+
+let cards = ""; //HTML a dibujar desde JS. Seran las cards que estaban estaticas en HTML
+
 //Declaro funciones
 
 function imprimirArray(array) {
@@ -121,39 +163,33 @@ function imprimirArray(array) {
     imprimirArray(carrito)
     */
     
+
+
+//Local storage
+
+let usuario;
+let usuarioEnLS = JSON.stringify(localStorage.getItem('usuario'))
+// Si había algo almacenado, lo recupero. Si no le pido un ingreso
+if (usuarioEnLS) {
+usuario = usuarioEnLS
+} else {
+usuario = prompt('Ingrese su nombre de usuario')
+}
+
+let carritoGuardado = []
+let carritoEnLS = JSON.stringify(localStorage.getItem('carrito'))
+// Inicializo mi app con carrito como array vacío o con el registro que haya
+
+if (carritoEnLS ) {
+   carritoGuardado = carritoEnLS
+}
+// Función que renderizaría el carrito
+//renderCarrito( carrito )
+
 //Eventos, la informacion es tomada desde el array de productos, se dibuja una card por cada uno y se interactua con dicho html y atributos.
 //Declaro de variables,arrays y objetos
 
-const carrito = []; //Este array almacena los productos agregados al carrito
 
-const productos = [  //Este array almacena los productos disponibles (simula la BD)
-    {
-        id: 1,
-        nombre: "Almohada",
-        precio: 1000,
-        stock: 9999,
-        descripcion: "Producto generico",
-        cantidadEnCarrito: 1
-    },
-    {
-        id: 2,
-        nombre: "Almohadon",
-        precio: 500,
-        stock: 0,
-        descripcion: "Almohadon  clasico",
-        cantidadEnCarrito: 0
-    },
-    {
-        id: 3,
-        nombre: "Bolsa de mano",
-        precio: 100,
-        stock: 1,
-        descripcion: "Bolsa de mano",
-        cantidadEnCarrito: 1
-    }
-];
-
-let cards = ""; //HTML a dibujar desde JS. Seran las cards que estaban estaticas en HTML
 
 console.log("Version con eventos");
 
@@ -182,6 +218,16 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
      console.log('El producto seleccionado es: ')
      console.log(producto.nombre)
      carrito.push(producto)
+     //Agrego logica de boton de carrito, cada vez que agrego un elemento al array carrito, muestro su length en el HTML
+     document.getElementById("cart-total").innerHTML = carrito.length;
+     console.log(carrito);
+     localStorage.setItem("totalCarrito",carrito.length);
+     //Agrego monto total
+     montoAcomulado+=carrito[Indiceproducto].precio;
+     console.log(montoAcomulado);
+     document.getElementById("month-total").innerHTML = "$"+montoAcomulado; //Ubico elemento HTML
+     localStorage.setItem("totalMonto",montoAcomulado);   
+
  })
  });
 

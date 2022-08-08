@@ -3,17 +3,18 @@
 //El archivo .js se invoca desde el html productos
 /***************************************E-COMMERCE sobre venta de indumentaria femenina*********************************************************/
 
-
-
 //Declaro variables
-const totalCarrito = localStorage.getItem("totalCarrito"); //Variable que se ve en local storage
+const carrito = JSON.parse(localStorage.getItem('carrito')) ?? []; //Este array almacena los productos agregados al carrito, si contiene algo en memoria se usa lo almacenado, si no, array vacio
+document.getElementById("cart-total").innerHTML = carrito.length;
+const totalCarrito = localStorage.getItem("totalCarrito"); //Variable que se ve en local storage, cantidad total de productos en carrito
 const montoTotal = localStorage.getItem("totalMonto");
 document.getElementById("cart-total").innerHTML = totalCarrito;
-document.getElementById("month-total").innerHTML = totalCarrito;
+document.getElementById("month-total").innerHTML = montoTotal; //almaceno monto total a pagar
 
 let montoAcomulado = 0;
 
-const carrito = []; //Este array almacena los productos agregados al carrito
+
+ 
 
 const productos = [  //Este array almacena los productos disponibles (simula la BD)
     {
@@ -46,6 +47,10 @@ let cards = ""; //HTML a dibujar desde JS. Seran las cards que estaban estaticas
 
 //Declaro funciones
 
+
+//Renderisar la lista de productos en el carrito en forma de lista
+//Usar funcion que valida si hay stock.
+
 function imprimirArray(array) {
  
     for (const producto of array) {
@@ -59,18 +64,18 @@ function imprimirArray(array) {
         const stock = producto.stock;
         console.log("El stock es de:"+ stock)
         if(producto.stock > 0){
-            return 1;
+            return true;
         }else{
-            return 0;
+            return false;
         }
      }
      
      //Esta funcion valida si un producto se encuentra cargado en el carrito 
      function validarProductoEnCarrito(producto) {
         if(producto.cantidadEnCarrito > 0){
-            return 1;
+            return true;
         }else{
-            return 0;
+            return false;
         }
      }
      
@@ -138,11 +143,24 @@ function imprimirArray(array) {
     
     
     //Esta funcion verifica la existencia de un producto en el array carrito de compras
-    
     function validarProductoEnCarrito2(producto){
         console.log(carrito.includes(producto)) 
         return carrito.includes(producto)
     }
+
+ 
+function vaciarCarrito(){   //elimino los campos del carrito
+    let boton_vaciar_carrito = document.getElementById("clear_cart_button")
+    boton_vaciar_carrito.onclick = () => {
+        localStorage.removeItem('totalMonto'),  //El monto acomulado
+        localStorage.removeItem('totalCarrito'), //La cantidad de productos en carrito
+        localStorage.removeItem('carrito'), //Los objetos producto
+        alert("El carrito fue vaciado completamente")
+        location.reload();
+     }  
+       
+}
+
     /*   
     //Tests sobre array de objetos + simulacion de flujo
      
@@ -165,33 +183,10 @@ function imprimirArray(array) {
     
 
 
-//Local storage
-
-let usuario;
-let usuarioEnLS = JSON.stringify(localStorage.getItem('usuario'))
-// Si había algo almacenado, lo recupero. Si no le pido un ingreso
-if (usuarioEnLS) {
-usuario = usuarioEnLS
-} else {
-usuario = prompt('Ingrese su nombre de usuario')
-}
-
-let carritoGuardado = []
-let carritoEnLS = JSON.stringify(localStorage.getItem('carrito'))
-// Inicializo mi app con carrito como array vacío o con el registro que haya
-
-if (carritoEnLS ) {
-   carritoGuardado = carritoEnLS
-}
-// Función que renderizaría el carrito
-//renderCarrito( carrito )
 
 //Eventos, la informacion es tomada desde el array de productos, se dibuja una card por cada uno y se interactua con dicho html y atributos.
 //Declaro de variables,arrays y objetos
 
-
-
-console.log("Version con eventos");
 
 productos.forEach((producto) => {   //Por cada elemento "producto" del arry productos se dibuja el siguiente HTML tomando los datos del array
     const idButton = `add-cart${producto.id}`
@@ -208,26 +203,39 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
 }) 
 
  productos.forEach((producto) => { 
-    const idButton = `add-cart${producto.id}`
-    document.getElementById(idButton).addEventListener('click', (event) => { //Defino un evento sobre el elemento idButton
-     event.target.style.backgroundColor="Green";  //Marco en verde el producto seleccionado
+     const idButton = `add-cart${producto.id}`
+     document.getElementById(idButton).addEventListener('click', (event) => { //Defino un evento sobre el elemento idButton
      const nodo = event.target; //Guardo inforimacion sobre el evento producido
      const idProducto=nodo.getAttribute("data-id");
      const Indiceproducto = productos.findIndex(producto => producto.id == idProducto) //Busco el producto seleccionado por su id
      producto = productos[Indiceproducto]  //Guardo el producto seleccionado segun su lugar en el array
-     console.log('El producto seleccionado es: ')
-     console.log(producto.nombre)
-     carrito.push(producto)
+     //Valido si hay stock de ese producto
+     if(validarStock(producto)){
+        console.log("Tiene stock")
+        console.log('El producto seleccionado es: ')
+        console.log(producto.nombre)
+        carrito.push(producto)
+        producto.stock--
+        console.log("El stock luego de comprar es: "+producto.stock)
+        event.target.style.backgroundColor="Green";  //Marco en verde el producto seleccionado
+
+     }else {
+        console.log("No tiene stock")
+        event.target.style.backgroundColor="Red";  //Marco en verde el producto seleccionado
+
+     }
      //Agrego logica de boton de carrito, cada vez que agrego un elemento al array carrito, muestro su length en el HTML
      document.getElementById("cart-total").innerHTML = carrito.length;
      console.log(carrito);
      localStorage.setItem("totalCarrito",carrito.length);
+     localStorage.setItem("carrito", JSON.stringify(carrito)); //Convierto a texto y guardo los productos en el local storage
      //Agrego monto total
      montoAcomulado+=carrito[Indiceproducto].precio;
      console.log(montoAcomulado);
-     document.getElementById("month-total").innerHTML = "$"+montoAcomulado; //Ubico elemento HTML
+     document.getElementById("month-total").innerHTML = montoAcomulado; //Ubico elemento HTML
      localStorage.setItem("totalMonto",montoAcomulado);   
 
  })
  });
 
+ vaciarCarrito();

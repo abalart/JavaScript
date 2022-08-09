@@ -23,23 +23,26 @@ const productos = [  //Este array almacena los productos disponibles (simula la 
         precio: 1000,
         stock: 9999,
         descripcion: "Producto generico",
-        cantidadEnCarrito: 1
+        cantidadEnCarrito: 1,
+        imagen:  "../imagenes/Almohadon.JPG" 
     },
     {
         id: 2,
-        nombre: "Almohadon",
+        nombre: "Almohadon ELLA",
         precio: 500,
         stock: 0,
         descripcion: "Almohadon  clasico",
-        cantidadEnCarrito: 0
+        cantidadEnCarrito: 0,
+        imagen:"../imagenes/bolsa-ella.JPG" 
     },
     {
         id: 3,
-        nombre: "Bolsa de mano",
+        nombre: "Aros",
         precio: 100,
         stock: 1,
         descripcion: "Bolsa de mano",
-        cantidadEnCarrito: 1
+        cantidadEnCarrito: 1,
+        imagen:  "../imagenes/aros2.JPG" 
     }
 ];
 
@@ -194,7 +197,8 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
 `<div class="centroCard">    
   <div class="card" style="width: 18rem;">
     <div class="card-body">
-        <h2>Nombre: ${producto.nombre}</h2>
+        <h2 class="texto_desc">Nombre: ${producto.nombre}</h2>
+        <img src="${producto.imagen}" class="d-block w-10 img_prod">
         <p>Precio: ${producto.precio}</p>  
         <button  data-id="${producto.id}" id="${idButton}">Añadir al carrito</button>
     </div>     

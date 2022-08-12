@@ -59,31 +59,20 @@ function imprimirArray(array) {
     }
     }
     
-    //Esta funcion valida si un producto cuenta con stock
+    //Esta funcion valida si un producto cuenta con stock (version optimizada)
     function validarStock(producto) {
+
         const stock = producto.stock;
         console.log("El stock es de:"+ stock)
-        if(producto.stock > 0){
-            return true;
-        }else{
-            return false;
-        }
+        producto.stock > 0 ? true:false
      }
      
-     //Esta funcion valida si un producto se encuentra cargado en el carrito 
+     //Esta funcion valida si un producto se encuentra cargado en el carrito (version optimizada)
      function validarProductoEnCarrito(producto) {
-        if(producto.cantidadEnCarrito > 0){
-            return true;
-        }else{
-            return false;
-        }
+        producto.cantidadEnCarrito > 0? true:false
+      
      }
-     
-     //Esta funcion obtiene el precio de un producto y lo imprime por consola web
-     function obtenerPrecio(producto) {
-        console.log("El precio del producto es: "+producto.precio)
-    }
-    
+         
      //Elimina producto, version con funcion
      function eliminarProductoCarrito(producto) {
         const enCarrito = validarProductoEnCarrito(producto);
@@ -97,49 +86,18 @@ function imprimirArray(array) {
          }
      
     
-    
     //Esta funcion elimina un producto del carrito por medio de su id
     function eliminarProducto(producto){
         if(validarProductoEnCarrito){
             const productoEliminar = producto.id;
             const index = carrito.findIndex( x => x.id === productoEliminar );
-            if(index!=-1){
-                console.log('El producto a eliminar es: '+ producto.nombre)
-                carrito.splice(index,1)
-            }
-            else{
-                console.log('El producto no está en el carrito')
-            }
-           
+          
+           index!=-1? carrito.splice(index,1):console.log('El producto no está en el carrito')  //Optimizado
         }
         console.log('Ahora la cantidad de productos es de: ' + carrito.length)
-         
     }
     
     
-    //Agregar producto al carrito
-    
-    function AgregarProducto()
-    {
-            let respuesta = prompt("Desea agregar un nuevo producto al carrito? Presione S para confirmar o N para denegar")
-            switch(respuesta){
-            case 'S': 
-            const productoNuevo = {id:3,nombre:"Sombrero",precio:500,stock:23,descripcion:"Sombrero de mujer",cantidadEnCarrito:4 }
-            carrito.push(productoNuevo)
-            console.log('Los productos en el carrito son:' + carrito.length)
-            console.log('El producto agregado es: '+carrito[carrito.length-1].nombre)
-            alert('Producto agregado')
-            break
-            case 'N':
-            alert('Usted no desa agregar nuevos productos al carrito')
-            break
-            default:
-            alert('Respuesta invalida')
-            break
-            }
-            console.log('Ahora la cantidad de productos es de: ' + carrito.length)
-            
-    }
     
     
     //Esta funcion verifica la existencia de un producto en el array carrito de compras
@@ -217,4 +175,4 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
  })
  });
 
- vaciarCarrito();
+ vaciarCarrito(); //Se invoca por medio de evento

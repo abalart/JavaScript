@@ -1,7 +1,7 @@
 //Agregando eventos
 
 //El archivo .js se invoca desde el html productos
-/***************************************E-COMMERCE sobre venta de indumentaria femenina*********************************************************/
+/***************************************E-COMMERCE sobre venta de indumentaria femenina y productos para el hogar*********************************************************/
 
 //Declaro variables
 const carrito = JSON.parse(localStorage.getItem('carrito')) ?? []; //Este array almacena los productos agregados al carrito, si contiene algo en memoria se usa lo almacenado, si no, array vacio
@@ -12,9 +12,6 @@ document.getElementById("cart-total").innerHTML = totalCarrito;
 document.getElementById("month-total").innerHTML = montoTotal; //almaceno monto total a pagar
 
 let montoAcomulado = 0;
-
-
- 
 
 const productos = [  //Este array almacena los productos disponibles (simula la BD)
     {
@@ -164,28 +161,6 @@ function vaciarCarrito(){   //elimino los campos del carrito
        
 }
 
-    /*   
-    //Tests sobre array de objetos + simulacion de flujo
-     
-    console.log('****Imprimir array****')
-    imprimirArray(carrito)
-    
-    console.log('****Elimino objeto producto****')
-    
-    eliminarProducto(producto1) //jean
-    imprimirArray(carrito)
-    
-    console.log('****Valido objeto producto****')
-    validarProductoEnCarrito2(producto2) //Ojota
-    
-    
-    console.log('****Agregar objeto producto****')
-    AgregarProducto()  
-    imprimirArray(carrito)
-    */
-    
-
-
 
 //Eventos, la informacion es tomada desde el array de productos, se dibuja una card por cada uno y se interactua con dicho html y atributos.
 //Declaro de variables,arrays y objetos
@@ -195,9 +170,9 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
     const idButton = `add-cart${producto.id}`
     document.getElementById("grilla_productos").innerHTML += 
 `<div class="centroCard">    
-  <div class="card" style="width: 18rem;">
+  <div class="card" style="width: 18rem">
     <div class="card-body">
-        <h2 class="texto_desc">Nombre: ${producto.nombre}</h2>
+        <h2 class="texto_desc">${producto.nombre}</h2>
         <img src="${producto.imagen}" class="d-block w-10 img_prod">
         <p>Precio: ${producto.precio}</p>  
         <button  data-id="${producto.id}" id="${idButton}">Añadir al carrito</button>

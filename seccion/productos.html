@@ -12,7 +12,9 @@
   integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="../CSS/main.css" />
   <script src="https://kit.fontawesome.com/61cffdb5f4.js" crossorigin="anonymous"></script>
-  <script src="../js/main.js"></script> 
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
 </head>
 <body>
   <header>
@@ -43,97 +45,32 @@
       </div>
     </nav>
   </header>
-<div class="centrado">
+<div id="seccion_producto"   class="centrado">
   <div class="badge bg-dark text-wrap estilo-proposito-web anim">
-    <h3> Nuestros productos </h3>
+    <h3 id="h3_productos"> Nuestros productos </h3>
   </div>
 </div>
+<form class="d-flex">
+  <button class="btn btn-outline-dark" type="submit">
+    <i class="bi-cart-fill-me-1"></i>
+    Carrito
+    <span id="cart-total" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+    <i class="bi-cart-fill-me-1"></i>
+    Total
+    <span id="month-total" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+  </button>
+ </form>
 
+ <div id="clear_cart">
+  <button id="clear_cart_button" class="btn btn-outline-dark" > 
+    <i class="bi-cart-fill-me-1"></i>
+    Vaciar carrito
+    <span id="cart-total" class="badge bg-dark text-white ms-1 rounded-pill"></span>
+  </button>
+</div>
 
-
-<table class="table">
-  <thead>
-    <tr class="tr_producto">
-      <th scope="col">ID producto</th>
-      <th scope="col">Imagen</th>
-      <th scope="col">Precio</th>
-      <th scope="col">Descripcion</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th class="th_productos" scope="row">1</th>
-      <td>
-        <img src="../imagenes/alhomoadasx3.JPG" class="d-block w-10 img_prod" alt="Almohada">
-      </td>
-      <td>$1000</td>
-      <td>Almohadas artesanales para el hogar</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>
-        <img src="../imagenes/Almohadon.JPG" class="d-block w-10 img_prod" alt="Almohadon">
-      </td>
-      <td>$1500</td>
-      <td>Almohadon "Dreaming" ideal para decorar un sofá</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2"> 
-        <img src="../imagenes/bolsa-ella.JPG" class="d-block w-10 img_prod" alt="Bolsa">
-      </td>
-      <td>$1500</td>
-      <td>Bolsa de mano.</td>
-    </tr>
-    <tr>
-      <th scope="row">4</th>
-      <td colspan="2">
-        <img src="../imagenes/aros2.JPG" class="d-block w-10 img_prod" alt="Aros">
-      </td>
-      <td>$2000</td>
-      <td>Aros hechos de acero quirurjico.</td>
-    </tr>
-    <tr>
-      <th scope="row">5</th>
-      <td colspan="2">
-        <img src="../imagenes/bolsa-oso.JPG" class="d-block w-10 img_prod" alt="Bolsa oso">
-      </td>
-      <td>$900</td>
-      <td>Bolsa "oso".</td>
-    </tr>
-    <tr>
-      <th scope="row">6</th>
-      <td colspan="2"> 
-        <img src="../imagenes/bag.JPG" class="d-block w-10 img_prod" alt="Mochila">
-      </td>
-      <td>$2000</td>
-      <td>Mochila color trigo.</td>
-    </tr>
-    <tr>
-      <th scope="row">7</th>
-      <td colspan="2">
-        <img src="../imagenes/bolsa-paz.JPG" class="d-block w-10 img_prod" alt="Bolsa paz"> </td>
-      <td>$3000</td>
-      <td>Bolsa de mano "Paz"</td>
-    </tr>
-    <tr>
-      <th scope="row">8</th>
-      <td colspan="2">
-        <img src="../imagenes/otro-almohadon.JPG" class="d-block w-10 img_prod" alt="Almohadon">
-      </td>
-      <td>$1000</td>
-      <td>Almohadon para sillones</td>
-    </tr>
-    <tr>
-      <th scope="row">8</th>
-      <td colspan="2">
-        <img src="../imagenes/wild.JPG" class="d-block w-10 img_prod" alt="Alhomadon">
-      </td>
-      <td>$1000</td>
-      <td>Almohadon para sillones Wild</td>
-    </tr>
-  </tbody>
-</table>
+  <div id="grilla_productos" class="d-flex align-items-center">  
+  </div>
 <footer class="conteiner-fluid footer">
   <div class="row">
     <div class="col-lg-2 col-md-3 col-sm-0">
@@ -148,12 +85,13 @@
     </div>
     <div class="col-lg-4 col-md-3 col-sm-12">
       <div class="footer__contacto">
-          <p>Whatsapp: 112152123</p>
-          <p>Email: hendora@gmail.com</p>
+          <h3>Whatsapp: 112152123</h3>
+          <h3>Email: hendora@gmail.com</h3>
       </div>
   </div>
 </footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="../js/main.js">   </script>
 </body>
 </html>

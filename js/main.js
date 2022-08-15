@@ -1,161 +1,219 @@
-//ENTREGA 1 (Utilizo lo hecho en clase para el curso de desarrollo web)
+//Agregando eventos
 
-//El archivo .js se invoca desde el html products
+//El archivo .js se invoca desde el html productos
+/***************************************E-COMMERCE sobre venta de indumentaria femenina y productos para el hogar*********************************************************/
 
-/*********************************E-COMMERCE sobre venta de indumentaria femenina****************************************************************/
-/*
-//Declaro objeto generico a modo de ejemplo
+//Declaro variables
+const carrito = JSON.parse(localStorage.getItem('carrito')) ?? []; //Este array almacena los productos agregados al carrito, si contiene algo en memoria se usa lo almacenado, si no, array vacio
+document.getElementById("cart-total").innerHTML = carrito.length; //Inserto en el HTML el numero de productos en carrito
+const totalCarrito = localStorage.getItem("totalCarrito"); //Variable que se ve en local storage, cantidad total de productos en carrito
+const montoTotal = localStorage.getItem("totalMonto");
+document.getElementById("cart-total").innerHTML = totalCarrito;
+document.getElementById("month-total").innerHTML = montoTotal; //almaceno monto total a pagar
 
-const product = {
-     
-     id:1,
-     name:"Remera",
-     price:1000,
-     stock:9999,
-     descripcion:"product generico",
-     shoppingCart:1
-}
-      
+let montoAcomulado = 0;
 
-console.log(product);
-
-function product(Nuevo) {
-    this.id = Nuevo.id;
-    this.name = Nuevo.name;
-    this.price = Nuevo.price;
-    this.stock = Nuevo.stock;
-    this.descripcion = Nuevo.descripcion;
-    this.shoppingCart = Nuevo.shoppingCart;
+const productos = [  //Este array almacena los productos disponibles (simula la BD)
+    {
+        id: 1,
+        nombre: "Almohada",
+        precio: 1000,
+        stock: 9999,
+        descripcion: "Producto especial",
+        cantidadEnCarrito: 0,
+        imagen:  "../imagenes/Almohadon.JPG" 
+    },
+    {
+        id: 2,
+        nombre: "Almohadon ELLA",
+        precio: 500,
+        stock: 0,
+        descripcion: "Almohadon  clasico",
+        cantidadEnCarrito: 0,
+        imagen:"../imagenes/bolsa-ella.JPG" 
+    },
+    {
+        id: 3,
+        nombre: "Aros",
+        precio: 100,
+        stock: 3,
+        descripcion: "Aros",
+        cantidadEnCarrito: 0,
+        imagen:  "../imagenes/aros2.JPG" 
+    },
+    {
+        id: 4,
+        nombre: "Cartera negra",
+        precio: 500,
+        stock: 2,
+        descripcion: "Cartera",
+        cantidadEnCarrito: 0,
+        imagen:  "../imagenes/cartera negra.JPG" 
     }
+];
 
-const product1 = new product({    
-        id:1,
-        name:"Jean",
-        price:500,
-        stock:0,
-        descripcion:"Jeans clasicos",
-        shoppingCart:0 });
-
-    console.log(product);
+let cards = ""; //HTML a dibujar desde JS. Seran las cards que estaban estaticas en HTML
 
 //Declaro funciones
 
-function checkStock(product) {
-    const stock = product.stock;
-    console.log("El stock es de:"+ stock)
-    if(product.stock > 0){
-        return 1;
-    }else{
-        return 0;
-    }
-}
-
-function checkProductInShoppingCart(product) {
-    if(product.shoppingCart > 0){
-        return 1;
-    }else{
-        return 0;
-    }
-}
+//Proximos agregados:
+//Renderisar la lista de productos en el carrito en forma de lista
 
 
-function agregarproductCarrito(product) {
-    const tenemosStock = checkStock(product);
-    if(tenemosStock){
-        console.log('Agregas el product al carrito: ' + product.name);
-        product.shoppingCart++;
-    }else{
-        console.log('Sin stock');
+function imprimirArray(array) {
+ 
+    for (const producto of array) {
+    console.log(producto.id);
+    console.log(producto.nombre);
+             }
     }
+    
+    //Esta funcion valida si un producto cuenta con stock (version optimizada)
+    function validarStock(producto) {
+        const stock = producto.stock
+        console.log(stock)
+        if(stock > 0) {
+            return true;
+        }
+        else {
+           return false;
+         }
+                
+     }
+     
+     //Esta funcion valida si un producto se encuentra cargado en el carrito  
+     function validarProductoEnCarrito(producto) {
+        if(producto.cantidadEnCarrito > 0) {
+            return true;
+        }
+            else {
+                return false;
+            }
+     }
+         
+     //Elimina producto, version con funcion
+     function eliminarProductoCarrito(producto) {
+        const enCarrito = validarProductoEnCarrito(producto);
+        if(enCarrito){
+            console.log('Eliminando 1 stock de '+producto.nombre+' del carrito');
+            producto.cantidadEnCarrito--;
+            console.log('Quedan: '+producto.cantidadEnCarrito+' en el carrito');
+        }else{
+            console.log('El producto no está en carrito');
+        }
+         }
+     
+    
+    //Esta funcion elimina un producto del carrito por medio de su id
+    function eliminarProducto(producto){
+        if(validarProductoEnCarrito){
+            const productoEliminar = producto.id;
+            const index = carrito.findIndex( x => x.id === productoEliminar );
+          
+           index!=-1? carrito.splice(index,1):console.log('El producto no está en el carrito')  //Optimizado
+        }
+        console.log('Ahora la cantidad de productos es de: ' + carrito.length)
+    }
+    
+    
+    
+    
+    //Esta funcion verifica la existencia de un producto en el array carrito de compras
+    function validarProductoEnCarrito2(producto){
+        console.log(carrito.includes(producto)) 
+        return carrito.includes(producto)
     }
 
-
-function eliminarproductCarrito(product) {
-    const enCarrito = checkProductInShoppingCart(product);
-    if(enCarrito){
-        console.log('Eliminando 1 stock de '+product.name+' del carrito');
-        product.shoppingCart--;
-        console.log('Quedan: '+product.shoppingCart+' en el carrito');
-    }else{
-        console.log('El product no está en carrito');
-    }
+ function actualizarPantalla(){
+    location.reload();
  }
 
-function obtenerprice(product) {
-         console.log("El price del product es: "+product.price)
-     }
-
-//Tests
-
-console.log("obtenerprice");
-obtenerprice(product);  
-
-console.log("agregarproductCarrito");
-agregarproductCarrito(product);
-
-console.log("eliminarproductCarrito");
-eliminarproductCarrito(product);
-
-//product1
-
-console.log("obtenerprice");
-obtenerprice(product1);  
-
-console.log("agregarproductCarrito");
-agregarproductCarrito(product1);
-
-console.log("eliminarproductCarrito");
-eliminarproductCarrito(product1);
-*/
-////// PRACTICAS /////
-
-
-
-const numeros = [1, 2, 3, 4, 5];
-
-for (let index = 0; index < numeros.length; index++) {
-console.log(numeros[index])
+function vaciarCarrito(){   //elimino los campos del carrito
+    let boton_vaciar_carrito = document.getElementById("clear_cart_button")
+    boton_vaciar_carrito.onclick = () => {
+        localStorage.removeItem('totalMonto'),  //El monto acomulado
+        localStorage.removeItem('totalCarrito'), //La cantidad de productos en carrito
+        localStorage.removeItem('carrito'), //Los objetos producto
+        Swal.fire({
+            icon: 'success',
+            title: 'Carrito de compras vaciado',
+          })
+          setTimeout(actualizarPantalla, 1000);
+       
+     }  
+       
 }
 
-console.log(numeros)
 
-numeros.splice(0,2) //Elimina, el primer parametro es el indice desde donde comenzar a eliminar y el segundo la cantidad de elementos.
-
-console.log("Se eliminaron elementos"+numeros)
-
-numeros.push(990) //push agrega un nuevo elemento al final del array
-
-console.log("Agrego un numero al final"+numeros)
-
-numeros.unshift(0) //Agrega al comienzo
-
-console.log("Agrego un numero al comienzo"+numeros)
-
-numeros.shift() //Elimina un elemento del comienzo
-
-console.log("Elimina un elemento del comienzo"+numeros)
-
-numeros.pop()//Elimina un elemento del final
-
-console.log("Elimina un elemento del final"+numeros)
+//Eventos, la informacion es tomada desde el array de productos, se dibuja una card por cada uno y se interactua con dicho html y atributos.
+//Declaro de variables,arrays y objetos
 
 
-numeros.unshift(-56)
-console.log("Agrega un elemento al inicio "+numeros)
+productos.forEach((producto) => {   //Por cada elemento "producto" del arry productos se dibuja el siguiente HTML tomando los datos del array
+    const idButton = `add-cart${producto.id}`
+    document.getElementById("grilla_productos").innerHTML += 
+`<div class="centroCard">    
+  <div class="card" style="width: 18rem">
+    <div class="card-body">
+        <h2 class="texto_desc">${producto.nombre}</h2>
+        <img src="${producto.imagen}" class="d-block w-10 img_prod">
+        <p>Precio: ${producto.precio}</p>  
+        <button  data-id="${producto.id}" id="${idButton}">Añadir al carrito</button>
+    </div>     
+    </div>  
+</div>`
+}) 
 
-const palabras = ['hola','que','talco'];
+ productos.forEach((producto) => { 
+     const idButton = `add-cart${producto.id}`
+     document.getElementById(idButton).addEventListener('click', (event) => { //Defino un evento sobre el elemento idButton DE CADA card
+     const nodo = event.target; //Guardo informacion sobre el evento producido
+     const idProducto=nodo.getAttribute("data-id");
+     const Indiceproducto = productos.findIndex(producto => producto.id == idProducto) //Busco el producto seleccionado por su id
+     producto = productos[Indiceproducto]  //Guardo el producto seleccionado segun su lugar en el array
+     console.log("idProducto:"+idProducto)
+     console.log("Indiceproducto:"+Indiceproducto)
+     //Valido si hay stock de ese producto
+     if(validarStock(producto)){
+        console.log("Tiene stock")
+        console.log('El producto seleccionado es: ')
+        console.log(producto.nombre)
+        carrito.push(producto)
+        Toastify({
+            text: "Producto agregado al carrito",
+            duration: 3000, 
+            style: {
+                background: "linear-gradient(to right, #ffaa7f, #ffaa7f)",
+              }
+            }).showToast();
+        producto.stock--
+        console.log("El stock luego de comprar es: "+producto.stock)
+        event.target.style.backgroundColor="Green";  //Marco en verde el producto seleccionado
+        //Agrego monto total
+        let pre =  productos[Indiceproducto].precio;
+        console.log("el precio es:"+pre);
+        montoAcomulado+=productos[Indiceproducto].precio;  
+     }else {
+        console.log("No tiene stock")
+        Swal.fire({
+            icon: 'error',
+            title: 'Producto seleccionado sin stock',
+          })
+        event.target.style.backgroundColor="Red";  //Marco en verde el producto seleccionado
 
-console.log("Se agrega * entre elementos " + palabras.join('*'))
+     }
+     //Agrego logica de boton de carrito, cada vez que agrego un elemento al array carrito, muestro su length en el HTML
+     document.getElementById("cart-total").innerHTML = carrito.length;
+     console.log(carrito);
+     localStorage.setItem("totalCarrito",carrito.length);
+     localStorage.setItem("carrito", JSON.stringify(carrito)); //Convierto a texto y guardo los productos en el local storage
+     
+     
+     console.log("El monto acomulado:"+montoAcomulado);
+     document.getElementById("month-total").innerHTML = montoAcomulado; //Ubico elemento HTML
+     localStorage.setItem("totalMonto",montoAcomulado);   
 
-const unidos = numeros.concat(palabras) //concatena 2 arrays
+ })
+ });
 
-console.log(unidos)
- 
-console.log("Slice "+palabras.slice(0,2))
-
-console.log( numeros.indexOf(5) ) //El elemento 5  se encuentra en la posicion 3
-
-console.log( numeros.includes(5) ) //Retorno si esta o no
-
-console.log(numeros.reverse())
-
+ vaciarCarrito(); //Se invoca por medio de evento Onclick

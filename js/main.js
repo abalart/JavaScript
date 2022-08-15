@@ -36,10 +36,19 @@ const productos = [  //Este array almacena los productos disponibles (simula la 
         id: 3,
         nombre: "Aros",
         precio: 100,
-        stock: 1,
+        stock: 3,
         descripcion: "Aros",
         cantidadEnCarrito: 0,
         imagen:  "../imagenes/aros2.JPG" 
+    },
+    {
+        id: 4,
+        nombre: "Cartera negra",
+        precio: 500,
+        stock: 2,
+        descripcion: "Cartera",
+        cantidadEnCarrito: 0,
+        imagen:  "../imagenes/cartera negra.JPG" 
     }
 ];
 
@@ -157,11 +166,13 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
 
  productos.forEach((producto) => { 
      const idButton = `add-cart${producto.id}`
-     document.getElementById(idButton).addEventListener('click', (event) => { //Defino un evento sobre el elemento idButton
-     const nodo = event.target; //Guardo inforimacion sobre el evento producido
+     document.getElementById(idButton).addEventListener('click', (event) => { //Defino un evento sobre el elemento idButton DE CADA card
+     const nodo = event.target; //Guardo informacion sobre el evento producido
      const idProducto=nodo.getAttribute("data-id");
      const Indiceproducto = productos.findIndex(producto => producto.id == idProducto) //Busco el producto seleccionado por su id
      producto = productos[Indiceproducto]  //Guardo el producto seleccionado segun su lugar en el array
+     console.log("idProducto:"+idProducto)
+     console.log("Indiceproducto:"+Indiceproducto)
      //Valido si hay stock de ese producto
      if(validarStock(producto)){
         console.log("Tiene stock")
@@ -171,7 +182,10 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
         producto.stock--
         console.log("El stock luego de comprar es: "+producto.stock)
         event.target.style.backgroundColor="Green";  //Marco en verde el producto seleccionado
-
+        //Agrego monto total
+        let pre =  productos[Indiceproducto].precio;
+        console.log("el precio es:"+pre);
+        montoAcomulado+=productos[Indiceproducto].precio;  
      }else {
         console.log("No tiene stock")
         event.target.style.backgroundColor="Red";  //Marco en verde el producto seleccionado
@@ -182,10 +196,7 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
      console.log(carrito);
      localStorage.setItem("totalCarrito",carrito.length);
      localStorage.setItem("carrito", JSON.stringify(carrito)); //Convierto a texto y guardo los productos en el local storage
-     //Agrego monto total
-     let pre =  carrito[Indiceproducto].precio;
-     console.log("el precio es:"+pre);
-     montoAcomulado+=carrito[Indiceproducto].precio;  //error
+     
      
      console.log("El monto acomulado:"+montoAcomulado);
      document.getElementById("month-total").innerHTML = montoAcomulado; //Ubico elemento HTML

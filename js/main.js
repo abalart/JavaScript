@@ -65,7 +65,7 @@ function imprimirArray(array) {
     for (const producto of array) {
     console.log(producto.id);
     console.log(producto.nombre);
-    }
+             }
     }
     
     //Esta funcion valida si un producto cuenta con stock (version optimizada)
@@ -179,6 +179,13 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
         console.log('El producto seleccionado es: ')
         console.log(producto.nombre)
         carrito.push(producto)
+        Toastify({
+            text: "Producto agregado al carrito",
+            duration: 3000, 
+            style: {
+                background: "linear-gradient(to right, #ffaa7f, #ffaa7f)",
+              }
+            }).showToast();
         producto.stock--
         console.log("El stock luego de comprar es: "+producto.stock)
         event.target.style.backgroundColor="Green";  //Marco en verde el producto seleccionado
@@ -188,6 +195,10 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
         montoAcomulado+=productos[Indiceproducto].precio;  
      }else {
         console.log("No tiene stock")
+        Swal.fire({
+            icon: 'error',
+            title: 'Producto seleccionado sin stock',
+          })
         event.target.style.backgroundColor="Red";  //Marco en verde el producto seleccionado
 
      }

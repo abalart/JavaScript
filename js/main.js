@@ -5,7 +5,7 @@
 
 //Declaro variables
 const carrito = JSON.parse(localStorage.getItem('carrito')) ?? []; //Este array almacena los productos agregados al carrito, si contiene algo en memoria se usa lo almacenado, si no, array vacio
-document.getElementById("cart-total").innerHTML = carrito.length;
+document.getElementById("cart-total").innerHTML = carrito.length; //Inserto en el HTML el numero de productos en carrito
 const totalCarrito = localStorage.getItem("totalCarrito"); //Variable que se ve en local storage, cantidad total de productos en carrito
 const montoTotal = localStorage.getItem("totalMonto");
 document.getElementById("cart-total").innerHTML = totalCarrito;
@@ -19,8 +19,8 @@ const productos = [  //Este array almacena los productos disponibles (simula la 
         nombre: "Almohada",
         precio: 1000,
         stock: 9999,
-        descripcion: "Producto generico",
-        cantidadEnCarrito: 1,
+        descripcion: "Producto especial",
+        cantidadEnCarrito: 0,
         imagen:  "../imagenes/Almohadon.JPG" 
     },
     {
@@ -37,8 +37,8 @@ const productos = [  //Este array almacena los productos disponibles (simula la 
         nombre: "Aros",
         precio: 100,
         stock: 1,
-        descripcion: "Bolsa de mano",
-        cantidadEnCarrito: 1,
+        descripcion: "Aros",
+        cantidadEnCarrito: 0,
         imagen:  "../imagenes/aros2.JPG" 
     }
 ];
@@ -47,9 +47,9 @@ let cards = ""; //HTML a dibujar desde JS. Seran las cards que estaban estaticas
 
 //Declaro funciones
 
-
+//Proximos agregados:
 //Renderisar la lista de productos en el carrito en forma de lista
-//Usar funcion que valida si hay stock.
+
 
 function imprimirArray(array) {
  
@@ -61,16 +61,25 @@ function imprimirArray(array) {
     
     //Esta funcion valida si un producto cuenta con stock (version optimizada)
     function validarStock(producto) {
-
-        const stock = producto.stock;
-        console.log("El stock es de:"+ stock)
-        producto.stock > 0 ? true:false
+        const stock = producto.stock
+        console.log(stock)
+        if(stock > 0) {
+            return true;
+        }
+        else {
+           return false;
+         }
+                
      }
      
-     //Esta funcion valida si un producto se encuentra cargado en el carrito (version optimizada)
+     //Esta funcion valida si un producto se encuentra cargado en el carrito  
      function validarProductoEnCarrito(producto) {
-        producto.cantidadEnCarrito > 0? true:false
-      
+        if(producto.cantidadEnCarrito > 0) {
+            return true;
+        }
+            else {
+                return false;
+            }
      }
          
      //Elimina producto, version con funcion
@@ -106,15 +115,22 @@ function imprimirArray(array) {
         return carrito.includes(producto)
     }
 
- 
+ function actualizarPantalla(){
+    location.reload();
+ }
+
 function vaciarCarrito(){   //elimino los campos del carrito
     let boton_vaciar_carrito = document.getElementById("clear_cart_button")
     boton_vaciar_carrito.onclick = () => {
         localStorage.removeItem('totalMonto'),  //El monto acomulado
         localStorage.removeItem('totalCarrito'), //La cantidad de productos en carrito
         localStorage.removeItem('carrito'), //Los objetos producto
-        alert("El carrito fue vaciado completamente")
-        location.reload();
+        Swal.fire({
+            icon: 'success',
+            title: 'Carrito de compras vaciado',
+          })
+          setTimeout(actualizarPantalla, 1000);
+       
      }  
        
 }
@@ -167,12 +183,15 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
      localStorage.setItem("totalCarrito",carrito.length);
      localStorage.setItem("carrito", JSON.stringify(carrito)); //Convierto a texto y guardo los productos en el local storage
      //Agrego monto total
-     montoAcomulado+=carrito[Indiceproducto].precio;
-     console.log(montoAcomulado);
+     let pre =  carrito[Indiceproducto].precio;
+     console.log("el precio es:"+pre);
+     montoAcomulado+=carrito[Indiceproducto].precio;  //error
+     
+     console.log("El monto acomulado:"+montoAcomulado);
      document.getElementById("month-total").innerHTML = montoAcomulado; //Ubico elemento HTML
      localStorage.setItem("totalMonto",montoAcomulado);   
 
  })
  });
 
- vaciarCarrito(); //Se invoca por medio de evento
+ vaciarCarrito(); //Se invoca por medio de evento Onclick

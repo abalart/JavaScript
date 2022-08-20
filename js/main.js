@@ -13,11 +13,25 @@ document.getElementById("month-total").innerHTML = montoTotal; //almaceno monto 
 
 let montoAcomulado = 0;
 
+//Invoco a API dolarsi para obtener el valor del dolar oficial y asi convertir mis precios
+fetch('https://www.dolarsi.com/api/api.php?type=valoresprincipales')
+.then( (resp) => resp.json() )
+.then( (data) => {
+    let valorDolarOficial = data[0].casa.compra
+    localStorage.setItem("valorDolarOficial", valorDolarOficial);  //Guardo el valor para acceder globalmente
+})
+
+
+
+let valorDolarOficial = localStorage.getItem('valorDolarOficial');
+valorDolarOficial = parseFloat(valorDolarOficial)
+console.log("El valor del dolar es:" + valorDolarOficial)
+
 const productos = [  //Este array almacena los productos disponibles (simula la BD)
     {
         id: 1,
         nombre: "Almohada",
-        precio: 1000,
+        precio: parseFloat((1000/valorDolarOficial).toFixed(3)), //limito cantidad de digitos
         stock: 9999,
         descripcion: "Producto especial",
         cantidadEnCarrito: 0,
@@ -26,7 +40,7 @@ const productos = [  //Este array almacena los productos disponibles (simula la 
     {
         id: 2,
         nombre: "Almohadon ELLA",
-        precio: 500,
+        precio: parseFloat(500/valorDolarOficial).toFixed(3),
         stock: 0,
         descripcion: "Almohadon  clasico",
         cantidadEnCarrito: 0,
@@ -35,7 +49,7 @@ const productos = [  //Este array almacena los productos disponibles (simula la 
     {
         id: 3,
         nombre: "Aros",
-        precio: 100,
+        precio: parseFloat((100/valorDolarOficial).toFixed(3)), //Parseo a float porque me lo toma como strings
         stock: 3,
         descripcion: "Aros",
         cantidadEnCarrito: 0,
@@ -44,7 +58,7 @@ const productos = [  //Este array almacena los productos disponibles (simula la 
     {
         id: 4,
         nombre: "Cartera negra",
-        precio: 500,
+        precio: parseFloat((500/valorDolarOficial).toFixed(3)),
         stock: 2,
         descripcion: "Cartera",
         cantidadEnCarrito: 0,
@@ -58,6 +72,8 @@ let cards = ""; //HTML a dibujar desde JS. Seran las cards que estaban estaticas
 
 //Proximos agregados:
 //Renderisar la lista de productos en el carrito en forma de lista
+//1 Buscar por id, insertar en HTML, recorrer carrito.
+//Agregar o quitar productos del carrito por separado
 
 
 function imprimirArray(array) {
@@ -157,7 +173,8 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
     <div class="card-body">
         <h2 class="texto_desc">${producto.nombre}</h2>
         <img src="${producto.imagen}" class="d-block w-10 img_prod">
-        <p>Precio: ${producto.precio}</p>  
+        <p>Precio: USD $${producto.precio}</p> 
+        <p>Stock: ${producto.stock}</p> 
         <button  data-id="${producto.id}" id="${idButton}">Añadir al carrito</button>
     </div>     
     </div>  
@@ -182,6 +199,8 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
         Toastify({
             text: "Producto agregado al carrito",
             duration: 3000, 
+            position: "center", 
+            gravity: "bottom",
             style: {
                 background: "linear-gradient(to right, #ffaa7f, #ffaa7f)",
               }
@@ -208,7 +227,6 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
      localStorage.setItem("totalCarrito",carrito.length);
      localStorage.setItem("carrito", JSON.stringify(carrito)); //Convierto a texto y guardo los productos en el local storage
      
-     
      console.log("El monto acomulado:"+montoAcomulado);
      document.getElementById("month-total").innerHTML = montoAcomulado; //Ubico elemento HTML
      localStorage.setItem("totalMonto",montoAcomulado);   
@@ -217,3 +235,5 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
  });
 
  vaciarCarrito(); //Se invoca por medio de evento Onclick
+
+

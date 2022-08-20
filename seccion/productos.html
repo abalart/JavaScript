@@ -41,6 +41,31 @@
               <a class="nav-link text-dark" href="../seccion/registro.html">Registro</a>
             </li>
           </ul>
+          <form class="d-flex">
+            <button class="btn btn-outline-dark" type="submit">
+                <i class="bi-cart-fill me-1"></i>
+               Ver productos en carrito
+                <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
+            </button>
+        </form>
+        <form class="d-flex">
+          <button class="btn btn-outline-dark" type="submit">
+            <i class="bi-cart-fill-me-1"></i>
+            Cantidad en carrito 
+            <span id="cart-total" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+            <i class="bi-cart-fill-me-1"></i>
+            Precio total USD $
+            <span id="month-total" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+          </button>
+         </form>
+        
+         <div id="clear_cart">
+          <button id="clear_cart_button" class="btn btn-outline-dark" > 
+            <i class="bi-cart-fill-me-1"></i>
+            Vaciar carrito
+            <span id="cart-total" class="badge bg-dark text-white ms-1 rounded-pill"></span>
+          </button>
+        </div>
         </div>
       </div>
     </nav>
@@ -50,24 +75,7 @@
     <h3 id="h3_productos"> Nuestros productos </h3>
   </div>
 </div>
-<form class="d-flex">
-  <button class="btn btn-outline-dark" type="submit">
-    <i class="bi-cart-fill-me-1"></i>
-    Carrito
-    <span id="cart-total" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-    <i class="bi-cart-fill-me-1"></i>
-    Total
-    <span id="month-total" class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-  </button>
- </form>
 
- <div id="clear_cart">
-  <button id="clear_cart_button" class="btn btn-outline-dark" > 
-    <i class="bi-cart-fill-me-1"></i>
-    Vaciar carrito
-    <span id="cart-total" class="badge bg-dark text-white ms-1 rounded-pill"></span>
-  </button>
-</div>
 
   <div id="grilla_productos" class="d-flex align-items-center">  
   </div>

@@ -198,8 +198,8 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
         carrito.push(producto)
         Toastify({
             text: "Producto agregado al carrito",
-            duration: 3000, 
-            position: "center", 
+            duration: 4000, 
+            position: "right", 
             gravity: "bottom",
             style: {
                 background: "linear-gradient(to right, #ffaa7f, #ffaa7f)",

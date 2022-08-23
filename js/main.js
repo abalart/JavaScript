@@ -1,5 +1,3 @@
-//Agregando eventos
-
 //El archivo .js se invoca desde el html productos
 /***************************************E-COMMERCE sobre venta de indumentaria femenina y productos para el hogar*********************************************************/
 
@@ -22,10 +20,9 @@ fetch('https://www.dolarsi.com/api/api.php?type=valoresprincipales')
 })
 
 
-
 let valorDolarOficial = localStorage.getItem('valorDolarOficial');
 valorDolarOficial = parseFloat(valorDolarOficial)
-console.log("El valor del dolar es:" + valorDolarOficial)
+
 
 const productos = [  //Este array almacena los productos disponibles (simula la BD)
     {
@@ -71,9 +68,13 @@ let cards = ""; //HTML a dibujar desde JS. Seran las cards que estaban estaticas
 //Declaro funciones
 
 //Proximos agregados:
-//Renderisar la lista de productos en el carrito en forma de lista
-//1 Buscar por id, insertar en HTML, recorrer carrito.
+//Renderizar la lista de productos en el carrito en forma de lista
+//Agregar evento sobre boton lista_productos on mouse onmouseover
+//1 Buscar por id, insertar en HTML, recorrer carrito dibujando una lista
+
+
 //Agregar o quitar productos del carrito por separado
+
 
 
 function imprimirArray(array) {
@@ -87,7 +88,6 @@ function imprimirArray(array) {
     //Esta funcion valida si un producto cuenta con stock (version optimizada)
     function validarStock(producto) {
         const stock = producto.stock
-        console.log(stock)
         if(stock > 0) {
             return true;
         }
@@ -196,6 +196,7 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
         console.log('El producto seleccionado es: ')
         console.log(producto.nombre)
         carrito.push(producto)
+        actualizarCarrito();
         Toastify({
             text: "Producto agregado al carrito",
             duration: 4000, 
@@ -234,6 +235,29 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
  })
  });
 
- vaciarCarrito(); //Se invoca por medio de evento Onclick
 
+ 
 
+ //Dibujando lista de productos del carrito en forma de tabla, se renderiza cada vez que se agrega un producto al carrito
+ //Desaparece si se actualiza la pagina.
+ const actualizarCarrito = () => {
+  let contadorDeCompra = 0
+        let fLen = carrito.length;
+        let text = "<ol>";
+        for (let i = 0; i < fLen; i++) {
+          text += `  
+            <tr>
+              <th scope="row">${i+1}</th>
+              <td> ${ carrito[i].nombre}</td>
+              <td>${ carrito[i].nombre}</td>
+              <td>${ carrito[i].imagen}</td>
+            </tr>` 
+        }
+        text += "</ol>";
+        
+        document.getElementById("tabla_carrito").innerHTML =  text 
+      
+}
+
+ vaciarCarrito(); //Se invoca por medio de evento onclick
+ 

@@ -1,5 +1,5 @@
 //El archivo .js se invoca desde el html productos
-/***************************************E-COMMERCE sobre venta de indumentaria femenina y productos para el hogar*********************************************************/
+/***************************************E-COMMERCE sobre venta de productos para el hogar*********************************************************/
 
 //Declaro variables
 const carrito = JSON.parse(localStorage.getItem('carrito')) ?? []; //Este array almacena los productos agregados al carrito, si contiene algo en memoria se usa lo almacenado, si no, array vacio
@@ -67,23 +67,9 @@ let cards = ""; //HTML a dibujar desde JS. Seran las cards que estaban estaticas
 
 //Declaro funciones
 
-//Proximos agregados:
-//Renderizar la lista de productos en el carrito en forma de lista
-//Agregar evento sobre boton lista_productos on mouse onmouseover
-//1 Buscar por id, insertar en HTML, recorrer carrito dibujando una lista
-
 
 //Agregar o quitar productos del carrito por separado
 
-
-
-function imprimirArray(array) {
- 
-    for (const producto of array) {
-    console.log(producto.id);
-    console.log(producto.nombre);
-             }
-    }
     
     //Esta funcion valida si un producto cuenta con stock (version optimizada)
     function validarStock(producto) {
@@ -99,26 +85,9 @@ function imprimirArray(array) {
      
      //Esta funcion valida si un producto se encuentra cargado en el carrito  
      function validarProductoEnCarrito(producto) {
-        if(producto.cantidadEnCarrito > 0) {
-            return true;
-        }
-            else {
-                return false;
-            }
+        producto.cantidadEnCarrito? true : false;
      }
-         
-     //Elimina producto, version con funcion
-     function eliminarProductoCarrito(producto) {
-        const enCarrito = validarProductoEnCarrito(producto);
-        if(enCarrito){
-            console.log('Eliminando 1 stock de '+producto.nombre+' del carrito');
-            producto.cantidadEnCarrito--;
-            console.log('Quedan: '+producto.cantidadEnCarrito+' en el carrito');
-        }else{
-            console.log('El producto no está en carrito');
-        }
-         }
-     
+           
     
     //Esta funcion elimina un producto del carrito por medio de su id
     function eliminarProducto(producto){
@@ -135,7 +104,7 @@ function imprimirArray(array) {
     
     
     //Esta funcion verifica la existencia de un producto en el array carrito de compras
-    function validarProductoEnCarrito2(producto){
+    function validarProductoEnCarrito(producto){
         console.log(carrito.includes(producto)) 
         return carrito.includes(producto)
     }
@@ -162,10 +131,10 @@ function vaciarCarrito(){   //elimino los campos del carrito
 
 
 //Eventos, la informacion es tomada desde el array de productos, se dibuja una card por cada uno y se interactua con dicho html y atributos.
-//Declaro de variables,arrays y objetos
 
 
-productos.forEach((producto) => {   //Por cada elemento "producto" del arry productos se dibuja el siguiente HTML tomando los datos del array
+ //Por cada elemento "producto" del arry productos se dibuja el siguiente HTML tomando los datos del array
+productos.forEach((producto) => {  
     const idButton = `add-cart${producto.id}`
     document.getElementById("grilla_productos").innerHTML += 
 `<div class="centroCard">    
@@ -241,7 +210,6 @@ productos.forEach((producto) => {   //Por cada elemento "producto" del arry prod
  //Dibujando lista de productos del carrito en forma de tabla, se renderiza cada vez que se agrega un producto al carrito
  //Desaparece si se actualiza la pagina.
  const actualizarCarrito = () => {
-  let contadorDeCompra = 0
         let fLen = carrito.length;
         let text = "<ol>";
         for (let i = 0; i < fLen; i++) {

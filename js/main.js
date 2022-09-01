@@ -180,8 +180,8 @@ productos.forEach((producto) => {
         event.target.style.backgroundColor="Green";  //Marco en verde el producto seleccionado
         //Agrego monto total
         let pre =  productos[Indiceproducto].precio;
-        console.log("el precio es:"+pre);
         montoAcomulado+=productos[Indiceproducto].precio;  
+       
      }else {
         console.log("No tiene stock")
         Swal.fire({
@@ -198,8 +198,8 @@ productos.forEach((producto) => {
      localStorage.setItem("carrito", JSON.stringify(carrito)); //Convierto a texto y guardo los productos en el local storage
      
      console.log("El monto acomulado:"+montoAcomulado);
-     document.getElementById("month-total").innerHTML = montoAcomulado; //Ubico elemento HTML
-     localStorage.setItem("totalMonto",montoAcomulado);   
+     document.getElementById("month-total").innerHTML = (montoAcomulado.toFixed(3)); //Ubico elemento HTML e inserto el monto
+     localStorage.setItem("totalMonto",(montoAcomulado.toFixed(3)));   
 
  })
  });
@@ -217,8 +217,7 @@ productos.forEach((producto) => {
             <tr>
               <th scope="row">${i+1}</th>
               <td> ${ carrito[i].nombre}</td>
-              <td>${ carrito[i].nombre}</td>
-              <td>${ carrito[i].imagen}</td>
+              <td>${ carrito[i].precio}</td>
             </tr>` 
         }
         text += "</ol>";
